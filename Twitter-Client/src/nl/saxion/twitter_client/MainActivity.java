@@ -25,6 +25,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+/**
+ * The MainActivity class
+ * @author Sharon and Dennis
+ *
+ */
 public class MainActivity extends ActionBarActivity {
 	
 	private Model model;

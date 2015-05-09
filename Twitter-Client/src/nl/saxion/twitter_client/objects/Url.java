@@ -1,12 +1,18 @@
 package nl.saxion.twitter_client.objects;
 
 import java.util.ArrayList;
-
+/**
+ * The Url class
+ * @author Sharon and Dennis
+ *
+ */
 public class Url {
+	
 	private String url;
 	private String expanded_url;
 	private String display_url;
 	private ArrayList<Integer> indices = new ArrayList<Integer>();
+	
 	/**
 	 * @return the url
 	 */

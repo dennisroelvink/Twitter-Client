@@ -18,6 +18,11 @@ import android.app.Activity;
 import android.content.res.AssetManager;
 import android.util.Log;
 
+/**
+ * The JSONHandler class
+ * @author Sharon and Dennis
+ *
+ */
 public class JSONHandler {
 	private Activity mainActivity;
 	private Model model;
@@ -29,7 +34,10 @@ public class JSONHandler {
 		model = app.getModel();
 	}
 	
-	
+	/**
+	 * Turns a JSON object into a tweet object and puts it into the tweetList from the model class
+	 * @param filename
+	 */
 	public void JSONToTweet(String filename) {
 		try {
 			String test = readAssetIntoString(filename);
@@ -41,7 +49,6 @@ public class JSONHandler {
 			for(int i = 0; i < tweets.length() ; i ++) {
 				JSONObject tweet = tweets.getJSONObject(i);
 				JSONObject user = tweet.getJSONObject("user");
-				//JSONObject name = tweet.getJSONObject("name");
 				
 				Log.d("Check", "Test2");
 				String tweetText = tweet.getString("text");
@@ -58,7 +65,12 @@ public class JSONHandler {
 			e1.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Reads the JSON file and turns it into one string and returns this string
+	 * @param filename
+	 * @return The JSON file string
+	 * @throws IOException
+	 */
     private String readAssetIntoString(String filename) throws IOException {
 		BufferedReader br = null;
 		StringBuilder sb = new StringBuilder();

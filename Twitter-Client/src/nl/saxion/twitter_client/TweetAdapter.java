@@ -26,6 +26,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * The TweetAdapter class
+ * @author Sharon and Dennis
+ *
+ */
 public class TweetAdapter extends ArrayAdapter<Tweet> implements Observer{
 
 	private LayoutInflater inflater;
@@ -41,6 +46,9 @@ public class TweetAdapter extends ArrayAdapter<Tweet> implements Observer{
 		inflater = LayoutInflater.from(context);
 	}
 	
+	/**
+	 * Updates the listview for every position
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		convertView = inflater.inflate(R.layout.tweet, parent,false);
@@ -65,12 +73,21 @@ public class TweetAdapter extends ArrayAdapter<Tweet> implements Observer{
 	}
 	
 
+	/**
+	 * Updates the class as soon as the observable is changed
+	 */
 	@Override
 	public void update(Observable observable, Object data) {
 		notifyDataSetChanged();
 		
 	}
 
+	/**
+	 * The URLHandler class
+	 * @author Sharon and Dennis
+	 * 
+	 * Handles the exception which occurred when converting the url into an imageview
+	 */
 	private final class URLHandler extends AsyncTask<Void,Void,Void> {
 
 		@Override

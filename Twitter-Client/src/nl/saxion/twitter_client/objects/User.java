@@ -1,12 +1,22 @@
 
 package nl.saxion.twitter_client.objects;
-
+/**
+ * The User class
+ * @author Sharon and Dennis
+ *
+ */
 public class User {
+	
 	private long userID;
 	private String name;
 	private String userName;
 	private String profilePhotoUrl;
-	
+	/**
+	 * Constructor of the User class
+	 * @param userName username of the twitteruser
+	 * @param name name of the twitteruser
+	 * @param photo profile picture of the twitteruser
+	 */
 	public User (String userName, String name, String photo) {
 		this.name = name;
 		this.userName = userName;

@@ -1,7 +1,12 @@
 package nl.saxion.twitter_client.objects;
 
-
+/**
+ * The Tweet class
+ * @author Sharon and Dennis
+ *
+ */
 public class Tweet {
+	
 	private String text;
 	private long tweetID;
 	private User user;
