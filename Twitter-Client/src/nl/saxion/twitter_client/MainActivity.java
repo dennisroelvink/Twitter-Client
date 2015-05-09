@@ -30,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
 	private Model model;
 	private ListView listview;
 	private TweetAdapter adapter;
+	private JSONHandler handler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,36 +43,8 @@ public class MainActivity extends ActionBarActivity {
 		listview = (ListView) findViewById(R.id.listViewTweet);
 		
 		
-		//Tweet tweet1 = new Tweet("Test1");
-		//Tweet tweet2 = new Tweet("Test2");
-		
-		//Log.d("User", "Test1");
-		try {
-			String test = readAssetIntoString("searchresult.json");
-			JSONObject obj = new JSONObject(test);
-			Log.d("Test","Test");
-			
-			JSONArray tweets = obj.getJSONArray("statuses");
-			Log.d("Check", "Test1");
-			for(int i = 0; i < tweets.length() ; i ++) {
-				JSONObject tweet = tweets.getJSONObject(i);
-				JSONObject user = tweet.getJSONObject("user");
-				
-				
-				Log.d("Check", "Test2");
-				String tweetText = tweet.getString("text");
-				Tweet tweetmsg = new Tweet(tweetText,new User(user.getString("name")));
-				model.addTweet(tweetmsg);
-			}
-			
-
-		} catch (IOException e) {
-			Log.d("error", "File not found");
-			e.printStackTrace();
-		} catch (JSONException e1) {
-			Log.d("error", "Iets met jSON");
-			e1.printStackTrace();
-		}
+		handler = new JSONHandler(this);
+		handler.JSONToTweet("searchresult.json");
 		
 		
 
@@ -97,30 +70,5 @@ public class MainActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-    private String readAssetIntoString(String filename) throws IOException {
-		BufferedReader br = null;
-		StringBuilder sb = new StringBuilder();
- 
-		String line;
-		try {
-			InputStream is = getAssets().open(filename, AssetManager.ACCESS_BUFFER);
-			br = new BufferedReader(new InputStreamReader(is));
-			while ((line = br.readLine()) != null) {
-				sb.append(line);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-            throw e;
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return sb.toString();		
 	}
 }

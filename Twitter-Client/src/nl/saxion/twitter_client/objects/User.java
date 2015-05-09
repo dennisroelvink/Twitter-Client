@@ -1,15 +1,19 @@
+
 package nl.saxion.twitter_client.objects;
 
 public class User {
 	private long userID;
 	private String name;
 	private String userName;
+	private String profilePhotoUrl;
 	
-	public User (String name) {
+	public User (String userName, String name, String photo) {
 		this.name = name;
 		this.userName = userName;
+		this.setProfilePhotoUrl(photo);
 		this.userID = userID;
 	}
+	
 
 	/**
 	 * @return the userID
@@ -51,6 +55,20 @@ public class User {
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	/**
+	 * @return the profilePhotoUrl
+	 */
+	public String getProfilePhotoUrl() {
+		return profilePhotoUrl;
+	}
+
+	/**
+	 * @param set the profilePhotoUrl
+	 */
+	public void setProfilePhotoUrl(String profilePhotoUrl) {
+		this.profilePhotoUrl = profilePhotoUrl;
 	}
 
 }

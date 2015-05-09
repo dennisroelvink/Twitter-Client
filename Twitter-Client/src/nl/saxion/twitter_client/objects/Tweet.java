@@ -1,7 +1,5 @@
 package nl.saxion.twitter_client.objects;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Tweet {
 	private String text;
@@ -46,9 +44,6 @@ public class Tweet {
 	 */
 	public User getUser() {
 		return user;
-	}
-	public String getUserString() {
-		return user.getName();
 	}
 
 	/**
