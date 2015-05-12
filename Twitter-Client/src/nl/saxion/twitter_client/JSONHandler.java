@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import nl.saxion.twitter_client.model.Model;
 import nl.saxion.twitter_client.model.TweetApplication;
+import nl.saxion.twitter_client.objects.Hashtag;
 import nl.saxion.twitter_client.objects.Tweet;
 import nl.saxion.twitter_client.objects.User;
 
@@ -49,11 +51,28 @@ public class JSONHandler {
 			for(int i = 0; i < tweets.length() ; i ++) {
 				JSONObject tweet = tweets.getJSONObject(i);
 				JSONObject user = tweet.getJSONObject("user");
+				JSONObject entity = tweet.getJSONObject("entities");
+				JSONArray hashtags = entity.getJSONArray("hashtags");
+				ArrayList<Hashtag> list = new ArrayList<Hashtag>();
+				
+				
+				for(int j = 0 ; j < hashtags.length() ; j ++ ) {
+					JSONObject hashtag = hashtags.getJSONObject(j);	
+					JSONArray indices = hashtag.getJSONArray("indices");
+					
+					if(indices.length() != 0) {
+						Hashtag tag = new Hashtag(hashtag.getString("text"), indices.getInt(0), indices.getInt(1));
+						list.add(tag);
+					}
+					
+					
+				}
 				
 				Log.d("Check", "Test2");
 				String tweetText = tweet.getString("text");
-				Tweet tweetmsg = new Tweet(tweetText,new User(user.getString("screen_name"), user.getString("name"), user.getString("profile_image_url")));
+				Tweet tweetmsg = new Tweet(tweetText,new User(user.getString("screen_name"), user.getString("name"), user.getString("profile_image_url")), list);
 				model.addTweet(tweetmsg);
+				
 			}
 			
 

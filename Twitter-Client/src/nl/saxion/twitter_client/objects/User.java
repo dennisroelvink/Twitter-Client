@@ -1,5 +1,14 @@
 
 package nl.saxion.twitter_client.objects;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+
 /**
  * The User class
  * @author Sharon and Dennis
@@ -11,6 +20,7 @@ public class User {
 	private String name;
 	private String userName;
 	private String profilePhotoUrl;
+	private Bitmap bitmap;
 	/**
 	 * Constructor of the User class
 	 * @param userName username of the twitteruser
@@ -22,6 +32,7 @@ public class User {
 		this.userName = userName;
 		this.setProfilePhotoUrl(photo);
 		this.userID = userID;
+		new URLHandler().execute();
 	}
 	
 
@@ -79,6 +90,44 @@ public class User {
 	 */
 	public void setProfilePhotoUrl(String profilePhotoUrl) {
 		this.profilePhotoUrl = profilePhotoUrl;
+	}
+	/**
+	 * @return the bitmap
+	 */
+	public Bitmap getBitmap() {
+		return bitmap;
+	}
+
+
+	/**
+	 * @param bitmap the bitmap to set
+	 */
+	public void setBitmap(Bitmap bitmap) {
+		this.bitmap = bitmap;
+	}
+	/**
+	 * The URLHandler class
+	 * @author Sharon and Dennis
+	 * 
+	 * Handles the exception which occurred when converting the url into an imageview
+	 */
+	private final class URLHandler extends AsyncTask<Void,Void,Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				URL Imageurl = new URL(getProfilePhotoUrl());
+				setBitmap(BitmapFactory.decodeStream(Imageurl.openConnection().getInputStream()));
+				
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException r) {
+				r.printStackTrace();
+			}
+			
+			return null;
+		}
+		
 	}
 
 }

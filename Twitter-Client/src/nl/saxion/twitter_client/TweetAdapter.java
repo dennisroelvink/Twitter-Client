@@ -13,18 +13,23 @@ import java.util.Observer;
 
 import nl.saxion.twitter_client.model.Model;
 import nl.saxion.twitter_client.model.TweetApplication;
+import nl.saxion.twitter_client.objects.Hashtag;
 import nl.saxion.twitter_client.objects.Tweet;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 
 /**
  * The TweetAdapter class
@@ -44,6 +49,7 @@ public class TweetAdapter extends ArrayAdapter<Tweet> implements Observer{
 		TweetApplication app = (TweetApplication) getContext().getApplicationContext();
 		model = app.getModel();
 		inflater = LayoutInflater.from(context);
+		
 	}
 	
 	/**
@@ -51,23 +57,28 @@ public class TweetAdapter extends ArrayAdapter<Tweet> implements Observer{
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		url = null;
 		convertView = inflater.inflate(R.layout.tweet, parent,false);
-		
 		Tweet tweet  = getItem(position);
-		
+
 		TextView tweetmsg = (TextView)convertView.findViewById(R.id.textViewTweetMessage);
 		TextView userName = (TextView)convertView.findViewById(R.id.textViewUserName);
 		TextView name = (TextView) convertView.findViewById(R.id.textViewName);
 		ImageView profilePhoto = (ImageView) convertView.findViewById(R.id.imageViewProfilePhoto);
 		
 		
-		tweetmsg.setText(tweet.getText());
+		SpannableString spannableTweet = new SpannableString(tweet.getText());
+		for(int i = 0; i < tweet.getHashtagListSize(); i++){
+			Hashtag tag = tweet.getHashtagAtPosition(i);
+			spannableTweet.setSpan(new ForegroundColorSpan(Color.RED), tag.getBeginHash(), tag.getEndHash(), 0);
+		}
+		
+		
+		tweetmsg.setText(spannableTweet, BufferType.SPANNABLE);
 		userName.setText(tweet.getUser().getUserName());
 		name.setText(" (" +tweet.getUser().getName() + ")");
 		url = tweet.getUser().getProfilePhotoUrl();
-		
-		new URLHandler().execute();
-		profilePhoto.setImageBitmap(bitmap);
+		profilePhoto.setImageBitmap(tweet.getUser().getBitmap());
 		return convertView;
 		
 	}
@@ -82,28 +93,5 @@ public class TweetAdapter extends ArrayAdapter<Tweet> implements Observer{
 		
 	}
 
-	/**
-	 * The URLHandler class
-	 * @author Sharon and Dennis
-	 * 
-	 * Handles the exception which occurred when converting the url into an imageview
-	 */
-	private final class URLHandler extends AsyncTask<Void,Void,Void> {
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			try {
-				URL Imageurl = new URL(url);
-				bitmap = BitmapFactory.decodeStream(Imageurl.openConnection().getInputStream());
-				
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			} catch (IOException r) {
-				r.printStackTrace();
-			}
-			
-			return null;
-		}
-		
-	}
 }

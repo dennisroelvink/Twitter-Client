@@ -1,5 +1,14 @@
 package nl.saxion.twitter_client.objects;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+
 /**
  * The Tweet class
  * @author Sharon and Dennis
@@ -7,15 +16,23 @@ package nl.saxion.twitter_client.objects;
  */
 public class Tweet {
 	
+	private ArrayList<Hashtag> hashtagList;
 	private String text;
 	private long tweetID;
 	private User user;
 	
-	public Tweet(String text, User user) {
+	public Tweet(String text, User user, ArrayList<Hashtag> list) {
 		this.text = text;
 		this.user = user;
+		hashtagList = list;
 	}
 
+	public int getHashtagListSize() {
+		return hashtagList.size();
+	}
+	public Hashtag getHashtagAtPosition(int pos) {
+		return hashtagList.get(pos);
+	}
 	/**
 	 * @return the text
 	 */
@@ -57,6 +74,7 @@ public class Tweet {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 
 	
 }
