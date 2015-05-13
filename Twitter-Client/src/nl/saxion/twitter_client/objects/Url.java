@@ -9,10 +9,16 @@ import java.util.ArrayList;
 public class Url {
 	
 	private String url;
-	private String expanded_url;
-	private String display_url;
+	private int beginUrl;
+	private int endUrl;
+	
 	private ArrayList<Integer> indices = new ArrayList<Integer>();
 	
+	public Url(String url, int beginUrl, int endUrl){
+		this.url = url;
+		this.setBeginUrl(beginUrl);
+		this.setEndUrl(endUrl);
+	}
 	/**
 	 * @return the url
 	 */
@@ -26,30 +32,6 @@ public class Url {
 		this.url = url;
 	}
 	/**
-	 * @return the expanded_url
-	 */
-	public String getExpanded_url() {
-		return expanded_url;
-	}
-	/**
-	 * @param expanded_url the expanded_url to set
-	 */
-	public void setExpanded_url(String expanded_url) {
-		this.expanded_url = expanded_url;
-	}
-	/**
-	 * @return the display_url
-	 */
-	public String getDisplay_url() {
-		return display_url;
-	}
-	/**
-	 * @param display_url the display_url to set
-	 */
-	public void setDisplay_url(String display_url) {
-		this.display_url = display_url;
-	}
-	/**
 	 * @return the indices
 	 */
 	public ArrayList<Integer> getIndices() {
@@ -61,6 +43,31 @@ public class Url {
 	public void setIndices(ArrayList<Integer> indices) {
 		this.indices = indices;
 	}
+	/**
+	 * @return the beginUrl
+	 */
+	public int getBeginUrl() {
+		return beginUrl;
+	}
+	/**
+	 * @param beginUrl the beginUrl to set
+	 */
+	public void setBeginUrl(int beginUrl) {
+		this.beginUrl = beginUrl;
+	}
+	/**
+	 * @return the endUrl
+	 */
+	public int getEndUrl() {
+		return endUrl;
+	}
+	/**
+	 * @param endUrl the endUrl to set
+	 */
+	public void setEndUrl(int endUrl) {
+		this.endUrl = endUrl;
+	}
+	
 	
 
 }
