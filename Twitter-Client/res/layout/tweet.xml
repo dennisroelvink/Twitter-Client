@@ -5,62 +5,48 @@
     android:orientation="horizontal" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_width="match_parent"
+        android:layout_height="174dp" >
+
+        <ImageView
+            android:id="@+id/imageViewProfilePhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher" />
 
         <LinearLayout
+            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="174dp" >
-
-            <ImageView
-                android:id="@+id/imageViewProfilePhoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/LinearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/textViewUserName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Username"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TextView
-                        android:id="@+id/textViewName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" (@F L)"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </LinearLayout>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" >
 
                 <TextView
-                    android:id="@+id/textViewTweetMessage"
+                    android:id="@+id/textViewUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tweet Message"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="#000000" />
+                    android:text="Username"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <ImageView
-                    android:id="@+id/imageViewPhoto"
+                <TextView
+                    android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher" />
-
+                    android:text=" (@F L)"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
-        </LinearLayout>
 
+            <TextView
+                android:id="@+id/textViewTweetMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tweet Message"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#000000" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

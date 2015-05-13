@@ -17,32 +17,14 @@ import android.os.AsyncTask;
 public class Tweet {
 	
 	private ArrayList<Hashtag> hashtagList;
-	private ArrayList<Url> urlList;
-	private ArrayList<UserMention> mentionList;
-	private Photo photo;
 	private String text;
 	private long tweetID;
 	private User user;
 	
-	public Tweet(String text, User user, ArrayList<Hashtag> list, ArrayList<Url> urlList, ArrayList<UserMention> mentionList) {
+	public Tweet(String text, User user, ArrayList<Hashtag> list) {
 		this.text = text;
 		this.user = user;
 		hashtagList = list;
-		this.urlList = urlList; 
-		this.mentionList = mentionList;
-		
-	}
-	public int getMentionListSize() {
-		return mentionList.size();
-	}
-	public UserMention getMentionAtPosition(int pos) {
-		return mentionList.get(pos);
-	}
-	public int getUrlListSize() {
-		return urlList.size();
-	}
-	public Url getUrlAtPosition(int pos) {
-		return urlList.get(pos);
 	}
 
 	public int getHashtagListSize() {
@@ -91,18 +73,6 @@ public class Tweet {
 	 */
 	public void setUser(User user) {
 		this.user = user;
-	}
-	/**
-	 * @return the photo
-	 */
-	public Photo getPhoto() {
-		return photo;
-	}
-	/**
-	 * @param photo the photo to set
-	 */
-	public void setPhoto(Photo photo) {
-		this.photo = photo;
 	}
 
 

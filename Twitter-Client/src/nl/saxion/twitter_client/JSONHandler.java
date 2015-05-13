@@ -9,11 +9,8 @@ import java.util.ArrayList;
 import nl.saxion.twitter_client.model.Model;
 import nl.saxion.twitter_client.model.TweetApplication;
 import nl.saxion.twitter_client.objects.Hashtag;
-import nl.saxion.twitter_client.objects.Photo;
 import nl.saxion.twitter_client.objects.Tweet;
-import nl.saxion.twitter_client.objects.Url;
 import nl.saxion.twitter_client.objects.User;
-import nl.saxion.twitter_client.objects.UserMention;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,15 +53,7 @@ public class JSONHandler {
 				JSONObject user = tweet.getJSONObject("user");
 				JSONObject entity = tweet.getJSONObject("entities");
 				JSONArray hashtags = entity.getJSONArray("hashtags");
-				JSONArray urls = entity.getJSONArray("urls");
-				JSONArray userMentions = entity.getJSONArray("user_mentions");
-				//JSONArray media = entity.getJSONArray("media");
-
-				
-				
 				ArrayList<Hashtag> list = new ArrayList<Hashtag>();
-				ArrayList<Url>urlList = new ArrayList<Url>();
-				ArrayList<UserMention> mentionList = new ArrayList<UserMention>();
 				
 				
 				for(int j = 0 ; j < hashtags.length() ; j ++ ) {
@@ -76,29 +65,12 @@ public class JSONHandler {
 						list.add(tag);
 					}
 					
-				}
-				
-				for(int k = 0; k < urls.length(); k++){
-					JSONObject url = urls.getJSONObject(k);
-					JSONArray indices = url.getJSONArray("indices");
 					
-					if(indices.length() != 0){
-						Url u = new Url(url.getString("url"), indices.getInt(0), indices.getInt(1));
-						urlList.add(u);
-					}
-				}
-				for(int l = 0; l < userMentions.length() ; l++) {
-					JSONObject userMention = userMentions.getJSONObject(l);
-					JSONArray indices = userMention.getJSONArray("indices");
-					if(indices.length() != 0){
-						UserMention UM = new UserMention(userMention.getString("screen_name"), indices.getInt(0), indices.getInt(1));
-						mentionList.add(UM);
-					}
 				}
 				
 				Log.d("Check", "Test2");
 				String tweetText = tweet.getString("text");
-				Tweet tweetmsg = new Tweet(tweetText,new User(user.getString("screen_name"), user.getString("name"), user.getString("profile_image_url")), list, urlList, mentionList);
+				Tweet tweetmsg = new Tweet(tweetText,new User(user.getString("screen_name"), user.getString("name"), user.getString("profile_image_url")), list);
 				model.addTweet(tweetmsg);
 				
 			}
